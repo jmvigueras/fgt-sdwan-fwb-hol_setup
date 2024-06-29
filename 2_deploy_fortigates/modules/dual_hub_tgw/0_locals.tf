@@ -29,7 +29,7 @@ locals {
   hub_1_bgp_asn  = lookup(var.vpn_hub_1[0], "bgp_asn_hub", "65001")
   hub_1_cidr     = "10.0.0.0/8"
   hub_1_vpn_cidr = "172.16.100.0/24" // VPN DialUp spokes cidr
-  hub_1_vpn_ddns = "hub-1-vpn"
+  hub_1_vpn_ddns = var.hub_1_dns_record
   hub_1_vpn_fqdn = "${local.hub_1_vpn_ddns}.${var.route53_zone_name}"
 
   # Config VPN DialUps FGT HUBs
@@ -80,7 +80,7 @@ locals {
   hub_2_cidr     = "10.0.0.0/8"
   hub_2_vpn_cidr = "172.20.100.0/24" // VPN DialUp spokes cidr
 
-  hub_2_vpn_ddns = "hub-2-vpn"
+  hub_2_vpn_ddns = var.hub_2_dns_record
   hub_2_vpn_fqdn = "${local.hub_2_vpn_ddns}.${var.route53_zone_name}"
 
   hub_2 = [for hub in var.vpn_hub_2 :

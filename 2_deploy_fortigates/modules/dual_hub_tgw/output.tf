@@ -3,11 +3,11 @@
 #-----------------------------------------------------------------------------------------------------
 output "hub_1" {
   value = {
-    fgt1_mgmt   = "https://${module.hub_1_nis.fgt_ips_map["az1.fgt1"]["port1.public"]}:${var.admin_port}"
-    fgt2_mgmt   = "https://${module.hub_1_nis.fgt_ips_map["az2.fgt1"]["port1.public"]}:${var.admin_port}"
-    fgt_user    = "admin"
-    fgt1_pwd    = element(module.hub_1.fgt_list, 0).id
-    fgt2_pwd    = element(module.hub_1.fgt_list, 1).id
+    fgt1_mgmt = "https://${one(module.hub_1_nis.fgt_ni_list["az1.fgt1"]["public_eips"])}:${var.admin_port}"
+    fgt2_mgmt = "https://${one(module.hub_1_nis.fgt_ni_list["az2.fgt1"]["public_eips"])}:${var.admin_port}"
+    fgt_user  = "admin"
+    fgt1_pwd  = element(module.hub_1.fgt_list, 0).id
+    fgt2_pwd  = element(module.hub_1.fgt_list, 1).id
   }
 }
 output "hub_1_spoke_to_tgw_vm" {
@@ -19,8 +19,8 @@ output "hub_1_spoke_to_tgw_vm" {
 #-----------------------------------------------------------------------------------------------------
 output "hub_2" {
   value = {
-    fgt1_mgmt   = "https://${module.hub_2_nis.fgt_ips_map["az1.fgt1"]["port3.mgmt"]}:${var.admin_port}"
-    fgt2_mgmt   = "https://${module.hub_2_nis.fgt_ips_map["az2.fgt1"]["port3.mgmt"]}:${var.admin_port}"
+    fgt1_mgmt   = "https://${one(module.hub_2_nis.fgt_ni_list["az1.fgt1"]["mgmt_eips"])}:${var.admin_port}"
+    fgt2_mgmt   = "https://${one(module.hub_2_nis.fgt_ni_list["az2.fgt1"]["mgmt_eips"])}:${var.admin_port}"
     fgt_user    = "admin"
     fgt1_pwd    = element(module.hub_2.fgt_list, 0).id
     fgt2_pwd    = element(module.hub_2.fgt_list, 1).id

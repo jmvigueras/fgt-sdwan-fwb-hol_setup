@@ -55,12 +55,13 @@ module "hub_1_config" {
 
   config_tgw_gre = true
   tgw_gre_peer = {
-    tgw_ip        = one([for i, v in local.hub_1_tgw_peers : v["tgw_ip"] if v["id"] == each.key])
-    inside_cidr   = one([for i, v in local.hub_1_tgw_peers : v["inside_cidr"] if v["id"] == each.key])
-    twg_bgp_asn   = local.tgw_bgp_asn
-    route_map_out = "rm_out_hub_to_external_0" //created by default prepend routes with community 65001:10
-    route_map_in  = ""
-    gre_name      = "gre-to-tgw"
+    tgw_ip            = one([for i, v in local.hub_1_tgw_peers : v["tgw_ip"] if v["id"] == each.key])
+    inside_cidr       = one([for i, v in local.hub_1_tgw_peers : v["inside_cidr"] if v["id"] == each.key])
+    twg_bgp_asn       = local.tgw_bgp_asn
+    route_map_out     = "rm_out_hub_to_external_0" //created by default prepend routes with community 65001:10
+    route_map_in      = ""
+    gre_name          = "gre-to-tgw"
+    default_originate = true
   }
 
   config_vxlan = true
@@ -133,7 +134,6 @@ module "hub_1_vpc_routes" {
 
   ni_id     = module.hub_1_nis.fgt_ids_map["az1.fgt1"]["port2.private"]
   ni_rt_ids = local.hub_1_ni_rt_ids
-
 }
 #------------------------------------------------------------------------------
 # VPC Spoke to TGW

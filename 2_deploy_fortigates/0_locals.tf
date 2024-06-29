@@ -29,9 +29,9 @@ locals {
   }
 
   hub_region = {
-    id  = "eu-south-2"
-    az1 = "eu-south-2a"
-    az2 = "eu-south-2c"
+    id  = "eu-central-1"
+    az1 = "eu-central-1a"
+    az2 = "eu-central-1c"
   }
 
   #-----------------------------------------------------------------------------------------------------
@@ -63,6 +63,8 @@ locals {
   hub_1_spoke_to_tgw_cidrs = ["10.1.100.0/24"] // VPC spoke attached to TGW (at least one)
 
   route53_zone_name = "fortidemoscloud.com"
+  hub_1_dns_record  = "hub1"
+  hub_2_dns_record  = "hub2"
 
   hub_1_id            = "EMEA"
   hub_1_bgp_asn_hub   = "65001"           

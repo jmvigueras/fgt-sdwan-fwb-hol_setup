@@ -30,6 +30,7 @@ output "keypair_names" {
     r1 = aws_key_pair.r1_keypair.key_name
     r2 = aws_key_pair.r2_keypair.key_name
     r3 = aws_key_pair.r3_keypair.key_name
+    hub = aws_key_pair.hub_keypair.key_name
   }
 }
 output "user_vm_ni_ids" {
@@ -37,6 +38,13 @@ output "user_vm_ni_ids" {
     r1 = module.r1_users_fgt.user_vm_ni_ids
     r2 = module.r2_users_fgt.user_vm_ni_ids
     r3 = module.r3_users_fgt.user_vm_ni_ids
+  }
+}
+output "user_vm_ni_ips" {
+  value = {
+    r1 = module.r1_users_fgt.user_vm_ni_ips
+    r2 = module.r2_users_fgt.user_vm_ni_ips
+    r3 = module.r3_users_fgt.user_vm_ni_ips
   }
 }
 output "user_fgt_eip_public" {
@@ -47,11 +55,9 @@ output "user_fgt_eip_public" {
   }
 }
 
-/*
-output "hub_bastion_ni" {
-  value = module.r1_hub.hub_bastion_ni
+output "lab_server_ni" {
+  value = module.dual_hub.lab_server_ni
 }
-output "hub_fmail_ni" {
-  value = module.r1_hub.hub_fmail_ni
+output "fmail_ni" {
+  value = module.dual_hub.fmail_ni
 }
-*/

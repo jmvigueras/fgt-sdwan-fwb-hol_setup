@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-    <title>Cloud worshop – Fortinet </title>
+    <title>Cloud workshop – Fortinet </title>
     <!-- CSS styles -->
     <link rel="stylesheet" href="styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -10,19 +10,29 @@
         function hide_studentdata(){
                 $("#js_result_studentdata").text("");
         };
-	    function get_studentdata(){
+	function get_studentdata(){
                 url = "functions/get_studentdata.php";
                 data = { email : $("#txt_email").val()}
                 $.post( url, data, function(data) {
                         document.getElementById('js_result_studentdata').innerHTML = data;
                 });
         };
-  </script>
+	function get_leaderboard(){
+                url = "functions/get_leaderboard.php";
+                $("#table").text("")
+                $.get( url, function(data, status){
+                        document.getElementById('js_result_leaderboard').innerHTML = data;
+                });
+        };
+	$(document).ready(function() {
+	   setInterval(get_leaderboard, 10000);
+	});
+     </script>
   </head>
   <body>
-    <h1><span style="color:Red">Fortinet</span> - FortiWEB Cloud y FortiGSLB Hands-on-Lab</h1>
+    <h1><span style="color:Red">Fortinet</span> - Fortigate Cloud SDWAN and FortiWEB Cloud Hands-on-Lab</h1>
     <h2>Cloud workshop</h2>
-    <h3>Guía y repositorio del laboratorio: <a href="https://github.com/fortidemoscloud/fwb-fgslb-hol">FortiWEB Cloud y FortiGSLB HoL GitRepo</a></h3>
+    <h3>Guide and repository lab: <a href="https://github.com/fortidemoscloud/fgt-sdwan-fwb-hol">Fortigate SDWAN and FortiWeb Clooud HoL GitRepo</a></h3>
     <hr/>
     <h3>Student data: </h3>
         <label for="email">Enter your email:</label>
@@ -32,6 +42,9 @@
         <pre>
         <code id="js_result_studentdata"></code>
         </pre>
+    <hr/>
+    <h2>Leader board</h2>
+        <p id="js_result_leaderboard"></p>
     <hr/>
   </body>
 </html>

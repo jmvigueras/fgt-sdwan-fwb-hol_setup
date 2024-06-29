@@ -21,6 +21,9 @@ module "dual_hub" {
   hub_2_vpc_cidr            = local.hub_2_vpc_cidr
   hub_1_spoke_to_tgw_cidrs  = local.hub_1_spoke_to_tgw_cidrs
 
+  hub_1_dns_record = local.hub_1_dns_record
+  hub_2_dns_record = local.hub_2_dns_record
+
   vpn_hub_1 = local.hub_1
   vpn_hub_2 = local.hub_2
 

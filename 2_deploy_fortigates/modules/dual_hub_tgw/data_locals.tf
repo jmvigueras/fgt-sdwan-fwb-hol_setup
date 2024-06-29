@@ -171,7 +171,7 @@ locals {
   #-----------------------------------------------------------------------------------------------------
   # HUB 1 - Config
   #-----------------------------------------------------------------------------------------------------
-  hub_1_extra_data = { for k, v in module.hub_1_nis.fgt_ports_config : 
+  hub_1_extra_data = { for k, v in module.hub_1_nis.fgt_ports_config :
     k => join("\n",
       [local.hub_extra_config_lab_server[k]],
       [local.hub_extra_config_lab_server_ssh[k]],
@@ -182,10 +182,10 @@ locals {
       [local.hub_extra_config_fw_policies[k]]
     )
   }
-  hub_extra_config_lab_server = {for k, v in module.hub_1_nis.fgt_ports_config : 
-   k => templatefile(
-      "${path.module}/templates/fgt_vip.conf", 
-      { external_ip   = element([for port in v: port["ip"] if port["tag"] == "public"], 0)
+  hub_extra_config_lab_server = { for k, v in module.hub_1_nis.fgt_ports_config :
+    k => templatefile(
+      "${path.module}/templates/fgt_vip.conf",
+      { external_ip   = element([for port in v : port["ip"] if port["tag"] == "public"], 0)
         mapped_ip     = local.lab_server_ip
         external_port = var.app_external_port
         mapped_port   = var.app_mapped_port
@@ -195,10 +195,10 @@ locals {
       }
     )
   }
-  hub_extra_config_lab_server_ssh = {for k, v in module.hub_1_nis.fgt_ports_config : 
-   k => templatefile(
-      "${path.module}/templates/fgt_vip.conf", 
-      { external_ip   = element([for port in v: port["ip"] if port["tag"] == "public"], 0)
+  hub_extra_config_lab_server_ssh = { for k, v in module.hub_1_nis.fgt_ports_config :
+    k => templatefile(
+      "${path.module}/templates/fgt_vip.conf",
+      { external_ip   = element([for port in v : port["ip"] if port["tag"] == "public"], 0)
         mapped_ip     = local.lab_server_ip
         external_port = "2222"
         mapped_port   = "22"
@@ -208,10 +208,10 @@ locals {
       }
     )
   }
-  hub_extra_config_lab_fmail_ssh = {for k, v in module.hub_1_nis.fgt_ports_config : 
-   k => templatefile(
-      "${path.module}/templates/fgt_vip.conf", 
-      { external_ip   = element([for port in v: port["ip"] if port["tag"] == "public"], 0)
+  hub_extra_config_lab_fmail_ssh = { for k, v in module.hub_1_nis.fgt_ports_config :
+    k => templatefile(
+      "${path.module}/templates/fgt_vip.conf",
+      { external_ip   = element([for port in v : port["ip"] if port["tag"] == "public"], 0)
         mapped_ip     = local.fmail_ip
         external_port = "2223"
         mapped_port   = "22"
@@ -221,10 +221,10 @@ locals {
       }
     )
   }
-  hub_extra_config_lab_fmail_https = {for k, v in module.hub_1_nis.fgt_ports_config : 
-   k => templatefile(
-      "${path.module}/templates/fgt_vip.conf", 
-      { external_ip   = element([for port in v: port["ip"] if port["tag"] == "public"], 0)
+  hub_extra_config_lab_fmail_https = { for k, v in module.hub_1_nis.fgt_ports_config :
+    k => templatefile(
+      "${path.module}/templates/fgt_vip.conf",
+      { external_ip   = element([for port in v : port["ip"] if port["tag"] == "public"], 0)
         mapped_ip     = local.fmail_ip
         external_port = "443"
         mapped_port   = "443"
@@ -234,10 +234,10 @@ locals {
       }
     )
   }
-  hub_extra_config_lab_fmail_smtp_1 = {for k, v in module.hub_1_nis.fgt_ports_config : 
-   k => templatefile(
-      "${path.module}/templates/fgt_vip.conf", 
-      { external_ip   = element([for port in v: port["ip"] if port["tag"] == "public"], 0)
+  hub_extra_config_lab_fmail_smtp_1 = { for k, v in module.hub_1_nis.fgt_ports_config :
+    k => templatefile(
+      "${path.module}/templates/fgt_vip.conf",
+      { external_ip   = element([for port in v : port["ip"] if port["tag"] == "public"], 0)
         mapped_ip     = local.fmail_ip
         external_port = "25"
         mapped_port   = "25"
@@ -247,10 +247,10 @@ locals {
       }
     )
   }
-  hub_extra_config_lab_fmail_smtp_2 = {for k, v in module.hub_1_nis.fgt_ports_config : 
-   k => templatefile(
-      "${path.module}/templates/fgt_vip.conf", 
-      { external_ip   = element([for port in v: port["ip"] if port["tag"] == "public"], 0)
+  hub_extra_config_lab_fmail_smtp_2 = { for k, v in module.hub_1_nis.fgt_ports_config :
+    k => templatefile(
+      "${path.module}/templates/fgt_vip.conf",
+      { external_ip   = element([for port in v : port["ip"] if port["tag"] == "public"], 0)
         mapped_ip     = local.fmail_ip
         external_port = "587"
         mapped_port   = "587"
@@ -260,12 +260,12 @@ locals {
       }
     )
   }
-  hub_extra_config_fw_policies = {for k, v in module.hub_1_nis.fgt_ports_config : 
-   k => templatefile(
-      "${path.module}/templates/fgt_policy.conf", 
-      { 
+  hub_extra_config_fw_policies = { for k, v in module.hub_1_nis.fgt_ports_config :
+    k => templatefile(
+      "${path.module}/templates/fgt_policy.conf",
+      {
         public_port = element([for port in v : port["port"] if port["tag"] == "public"], 0)
       }
-   )
+    )
   }
 }

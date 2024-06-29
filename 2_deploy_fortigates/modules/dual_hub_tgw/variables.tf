@@ -98,3 +98,11 @@ variable "route53_zone_name" {
   type    = string
   default = "fortidemoscloud.com"
 }
+variable "hub_1_dns_record" {
+  type    = string
+  default = "hub1"
+}
+variable "hub_2_dns_record" {
+  type    = string
+  default = "hub2"
+}

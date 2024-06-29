@@ -1,10 +1,10 @@
 # Create fmail VM
 module "fmail" {
-  source  = "./modules/fmail"
+  source = "./modules/fmail"
 
   prefix        = local.prefix
-  region        = local.r1_region
-  keypair       = local.keypair_names["r1"]
+  region        = local.hub_region
+  keypair       = local.keypair_names["hub"]
   license_type  = local.fmail_license_type
   fmail_version = local.fmail_version
 

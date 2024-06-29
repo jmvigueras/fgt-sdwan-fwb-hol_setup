@@ -26,9 +26,9 @@ resource "aws_route53_record" "hub_1_vpn_fqdn_fgts" {
   for_each = local.hub_1_public_eips
 
   zone_id = data.aws_route53_zone.route53_zone.zone_id
-  name    = "${replace(each.key, ".", "")}.eu-hub.${var.route53_zone_name}"
+  name    = "${replace(each.key, ".", "")}.hub-1.${var.route53_zone_name}"
   type    = "A"
-  ttl     = "30"
+  ttl     = "300"
   records = [each.value]
 }
 # Health-check parent
@@ -49,7 +49,7 @@ resource "aws_route53_record" "hub_1_vpn_fqdn" {
   zone_id = data.aws_route53_zone.route53_zone.zone_id
   name    = local.hub_1_vpn_ddns
   type    = "CNAME"
-  ttl     = 30
+  ttl     = "300"
 
   weighted_routing_policy {
     weight = floor(100 / length(keys(local.hub_1_public_eips)))
@@ -84,9 +84,9 @@ resource "aws_route53_record" "hub_2_vpn_fqdn_fgts" {
   for_each = local.hub_2_public_eips
 
   zone_id = data.aws_route53_zone.route53_zone.zone_id
-  name    = "${replace(each.key, ".", "")}.eu-op.${var.route53_zone_name}"
+  name    = "${replace(each.key, ".", "")}.hub-2.${var.route53_zone_name}"
   type    = "A"
-  ttl     = "30"
+  ttl     = "300"
   records = [each.value]
 }
 # Health-check parent
@@ -107,7 +107,7 @@ resource "aws_route53_record" "hub_2_vpn_fqdn" {
   zone_id = data.aws_route53_zone.route53_zone.zone_id
   name    = local.hub_2_vpn_ddns
   type    = "CNAME"
-  ttl     = 30
+  ttl     = "300"
 
   weighted_routing_policy {
     weight = floor(100 / length(local.hub_2_public_eips))
@@ -117,4 +117,20 @@ resource "aws_route53_record" "hub_2_vpn_fqdn" {
   records        = [aws_route53_record.hub_2_vpn_fqdn_fgts[each.key].name]
 
   health_check_id = aws_route53_health_check.hub_2_vpn_fqdn_hck_parent.id
+}
+# Create Route53 record entry with FGT HUBs public IPs
+resource "aws_route53_record" "hub_1_fmail_record" {
+  zone_id = data.aws_route53_zone.route53_zone.zone_id
+  name    = "fmail.${var.route53_zone_name}"
+  type    = "A"
+  ttl     = "300"
+  records = [for ip in local.hub_1_public_eips : ip]
+}
+# Create Route53 record entry with FGT HUBs public IPs
+resource "aws_route53_record" "hub_1_server_record" {
+  zone_id = data.aws_route53_zone.route53_zone.zone_id
+  name    = "server.${var.route53_zone_name}"
+  type    = "A"
+  ttl     = "300"
+  records = [for ip in local.hub_1_public_eips : ip]
 }

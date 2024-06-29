@@ -15,7 +15,7 @@ locals {
   ]
 
   # Number of users peer region
-  user_number_peer_region = 12
+  user_number_peer_region = 1
 
   # Path prefix for users (regex /path-prefix/)
   user_path_prefix = "/fgt-fwb-hol/"

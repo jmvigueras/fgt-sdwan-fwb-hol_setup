@@ -5,14 +5,14 @@
 module "lab_server" {
   source = "./modules/hub_vm"
 
-  region        = local.r1_region
+  region        = local.hub_region
   prefix        = "${local.prefix}-lab-server"
-  keypair       = local.keypair_names["r1"]
+  keypair       = local.keypair_names["hub"]
   instance_type = local.lab_srv_type
   linux_os      = "amazon"
   user_data     = data.template_file.srv_user_data.rendered
 
-  ni_id = local.hub_bastion_ni
+  ni_id = local.hub_lab_server_ni
 
   access_key = var.access_key
   secret_key = var.secret_key
@@ -53,8 +53,8 @@ data "template_file" "srv_user_data_dockerfile" {
 data "template_file" "srv_user_data_nginx_config" {
   template = file("./templates/nginx_config.tpl")
   vars = {
-    lab_token      = local.lab_token
-    random_url_db  = local.random_url_db
+    lab_token     = local.lab_token
+    random_url_db = local.random_url_db
   }
 }
 // Create nginx html

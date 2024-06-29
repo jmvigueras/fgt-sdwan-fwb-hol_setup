@@ -217,17 +217,18 @@ data "template_file" "config_fmg" {
 data "template_file" "config_tgw_gre" {
   template = file("${path.module}/templates/aws_tgw_gre.conf")
   vars = {
-    interface_name   = lookup(var.tgw_gre_peer, "gre_name", "gre-to-tgw")
-    bgp_asn          = lookup(var.tgw_gre_peer, "tgw_bgp_asn", "65011")
-    port             = local.map_type_port["private"]
-    tunnel_local_ip  = local.map_type_ip["private"]
-    tunnel_remote_ip = lookup(var.tgw_gre_peer, "tgw_ip", "")
-    local_ip         = cidrhost(lookup(var.tgw_gre_peer, "inside_cidr", "169.254.101.0/29"), 1)
-    remote_ip_1      = cidrhost(lookup(var.tgw_gre_peer, "inside_cidr", "169.254.101.0/29"), 2)
-    remote_ip_2      = cidrhost(lookup(var.tgw_gre_peer, "inside_cidr", "169.254.101.0/29"), 3)
-    route_map_in     = lookup(var.tgw_gre_peer, "route_map_in", "")
-    route_map_out    = lookup(var.tgw_gre_peer, "route_map_out", "")
-    local_bgp_asn    = var.config_hub ? var.hub[0]["bgp_asn_hub"] : var.config_spoke ? var.spoke["bgp_asn"] : var.bgp_asn_default
+    interface_name    = lookup(var.tgw_gre_peer, "gre_name", "gre-to-tgw")
+    bgp_asn           = lookup(var.tgw_gre_peer, "tgw_bgp_asn", "65011")
+    port              = local.map_type_port["private"]
+    tunnel_local_ip   = local.map_type_ip["private"]
+    tunnel_remote_ip  = lookup(var.tgw_gre_peer, "tgw_ip", "")
+    local_ip          = cidrhost(lookup(var.tgw_gre_peer, "inside_cidr", "169.254.101.0/29"), 1)
+    remote_ip_1       = cidrhost(lookup(var.tgw_gre_peer, "inside_cidr", "169.254.101.0/29"), 2)
+    remote_ip_2       = cidrhost(lookup(var.tgw_gre_peer, "inside_cidr", "169.254.101.0/29"), 3)
+    route_map_in      = lookup(var.tgw_gre_peer, "route_map_in", "")
+    route_map_out     = lookup(var.tgw_gre_peer, "route_map_out", "")
+    local_bgp_asn     = var.config_hub ? var.hub[0]["bgp_asn_hub"] : var.config_spoke ? var.spoke["bgp_asn"] : var.bgp_asn_default
+    default_originate = lookup(var.tgw_gre_peer, "default_originate", false)
   }
 }
 
