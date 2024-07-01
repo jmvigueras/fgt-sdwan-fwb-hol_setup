@@ -50,7 +50,7 @@ else:
       #######################################
       # Connect to servers
       for server_ip in server_list:
-        rURL = 'http://'+ server_ip[0]
+        rURL = 'http://'+ server_ip[0]+ ':31000'
         print (rURL)
         test_result = "0"
         try: 

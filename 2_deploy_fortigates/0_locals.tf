@@ -40,7 +40,7 @@ locals {
   admin_port        = "8443"
   admin_cidr        = "0.0.0.0/0"
   fgt_instance_type = "c6in.large"
-  fgt_build         = "build2662"
+  fgt_build         = "build1639"
   license_type      = "payg"
 
   #-----------------------------------------------------------------------------------------------------
