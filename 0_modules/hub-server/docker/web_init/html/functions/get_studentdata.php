@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $exit = '<p>';
                         $exit .= '<b>Usuario de laboratorio:</b>';
                         $exit .= '</p>';
-                        $exit .= '  aws_user_id = "' . $row['aws_user_id'] . '"<br>';
+                        $exit .= '  user_id = "' . $row['user_id'] . '"<br>';
                         $exit .= '<p>';
                         $exit .= '<b>Acceso a FortiWEB Cloud y FortiGSLB (IAM login):</b>';
                         $exit .= '</p>';

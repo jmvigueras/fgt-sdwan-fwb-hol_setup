@@ -47,6 +47,7 @@ data "template_file" "srv_user_data_dockerfile" {
     db_name       = local.db["db_name"]
     db_table      = local.db["db_table"]
     db_port       = local.db["db_port"]
+    app_port      = local.app1_mapped_port
   }
 }
 // Create nginx config

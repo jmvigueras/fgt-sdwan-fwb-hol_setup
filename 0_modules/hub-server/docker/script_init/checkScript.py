@@ -21,6 +21,7 @@ DBNAME    = os.getenv('DBNAME')
 DBTABLE   = os.getenv('DBTABLE')
 DBPORT    = os.getenv('DBPORT')
 DBPASS    = os.getenv('DBPASS')
+APP_PORT  = os.getenv('APP_PORT')
 
 #######################################
 # Connect to DataBase
@@ -50,7 +51,7 @@ else:
       #######################################
       # Connect to servers
       for server_ip in server_list:
-        rURL = 'http://'+ server_ip[0]+ ':31000'
+        rURL = 'http://'+ server_ip[0]+ ':'+ APP_PORT
         print (rURL)
         test_result = "0"
         try: 

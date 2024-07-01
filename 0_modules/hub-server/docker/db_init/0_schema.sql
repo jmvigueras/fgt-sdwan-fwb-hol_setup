@@ -7,7 +7,7 @@ USE students;
 DROP TABLE IF EXISTS students;
 CREATE TABLE `students` (
   `email` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
-  `aws_user_id` varchar(255) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `user_id` varchar(255) COLLATE latin1_spanish_ci DEFAULT NULL,
   `accountid` varchar(255) COLLATE latin1_spanish_ci DEFAULT NULL,
   `forticloud_user` varchar(255) COLLATE latin1_spanish_ci DEFAULT NULL,
   `forticloud_password` varchar(255) COLLATE latin1_spanish_ci DEFAULT NULL,
