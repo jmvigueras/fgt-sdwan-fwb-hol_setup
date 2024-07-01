@@ -23,13 +23,13 @@ variable "spoke_cidr_net" {
   default = "1"
 }
 variable "region" {
-  type    = map(string)
-  default = {     
+  type = map(string)
+  default = {
     id  = "eu-west-1"
     az1 = "eu-west-1a"
     az2 = "eu-west-1c"
   }
-} 
+}
 variable "admin_port" {
   type    = string
   default = "8443"
@@ -76,7 +76,7 @@ variable "app1_external_port" {
 variable "app2_external_port" {
   type    = string
   default = "31001"
-} 
+}
 variable "app1_mapped_port" {
   type    = string
   default = "31000"
@@ -84,4 +84,9 @@ variable "app1_mapped_port" {
 variable "app2_mapped_port" {
   type    = string
   default = "31001"
+}
+
+variable "lab_srv_private_ip" {
+  type    = string
+  default = "10.1.100.138"
 } 

@@ -1,6 +1,6 @@
 # Output
 output "user_fgts" {
-  value = { for k, v in module.user : k => 
+  value = { for k, v in module.user : k =>
     {
       fgt_mgmt    = "https://${v.fgt_eip_mgmt}:${var.admin_port}"
       fgt_public  = v.fgt_eip_public

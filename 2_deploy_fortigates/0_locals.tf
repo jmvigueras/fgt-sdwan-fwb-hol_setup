@@ -67,8 +67,8 @@ locals {
   hub_2_dns_record  = "hub2"
 
   hub_1_id            = "EMEA"
-  hub_1_bgp_asn_hub   = "65001"           
-  hub_1_bgp_asn_spoke = "65000"           
+  hub_1_bgp_asn_hub   = "65001"
+  hub_1_bgp_asn_spoke = "65000"
   hub_1_vpn_cidr      = "172.16.100.0/24" // VPN DialUp spokes cidr
   hub_1_cidr          = "10.0.0.0/8"      // AWS prefix 
 
@@ -81,28 +81,30 @@ locals {
   # Config VPN DialUps FGT HUB
   hub_1 = [
     {
-      id                = local.hub_1_id
-      bgp_asn_hub       = local.hub_1_bgp_asn_hub
-      bgp_asn_spoke     = local.hub_1_bgp_asn_spoke
-      vpn_cidr          = local.hub_1_vpn_cidr
-      vpn_psk           = trimspace(random_string.vpn_psk.result)
-      cidr              = local.hub_1_cidr
+      id            = local.hub_1_id
+      bgp_asn_hub   = local.hub_1_bgp_asn_hub
+      bgp_asn_spoke = local.hub_1_bgp_asn_spoke
+      vpn_cidr      = local.hub_1_vpn_cidr
+      vpn_psk       = trimspace(random_string.vpn_psk.result)
+      cidr          = local.hub_1_cidr
     }
   ]
 
   hub_2 = [
     {
-      id                = local.hub_2_id
-      bgp_asn_hub       = local.hub_2_bgp_asn_hub
-      bgp_asn_spoke     = local.hub_2_bgp_asn_spoke
-      vpn_cidr          = local.hub_2_vpn_cidr
-      vpn_psk           = trimspace(random_string.vpn_psk.result)
-      cidr              = local.hub_2_cidr
+      id            = local.hub_2_id
+      bgp_asn_hub   = local.hub_2_bgp_asn_hub
+      bgp_asn_spoke = local.hub_2_bgp_asn_spoke
+      vpn_cidr      = local.hub_2_vpn_cidr
+      vpn_psk       = trimspace(random_string.vpn_psk.result)
+      cidr          = local.hub_2_cidr
     }
   ]
 
-  r1_hubs = module.dual_hub.hubs
-  
+  #vpn_hubs = module.dual_hub.hubs
+  # Create an error SDWAN VPN variable for troubleshooting
+  vpn_hubs = [for i, v in module.dual_hub.hubs : merge(v, { external_fqdn = "error-hub${i + 1}.${local.route53_zone_name}" })]
+
   #-----------------------------------------------------------------------------------------------------
   # Outputs
   #-----------------------------------------------------------------------------------------------------

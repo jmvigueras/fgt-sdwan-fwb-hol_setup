@@ -45,6 +45,21 @@ services:
       PMA_ABSOLUTE_URI: http://${lab_fqdn}/${random_url_db}/
     networks:
       - frontweb
+  checkscript:
+    image: jviguerasfortinet/xpertsummit22:python-xs22
+    container_name: checkscript
+    restart: always
+    environment:
+      DBHOST: '${db_host}'
+      DBUSER: 'root'
+      DBNAME: '${db_name}'
+      DBTABLE: '${db_table}'
+      DBPORT: '${db_port}'
+      DBPASS: '${db_pass}'
+    depends_on:
+      - db
+    networks:
+      - frontweb
   proxynginx:
     image: nginx:latest
     container_name: proxynginx

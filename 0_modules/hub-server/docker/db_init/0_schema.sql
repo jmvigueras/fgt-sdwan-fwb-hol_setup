@@ -16,5 +16,7 @@ CREATE TABLE `students` (
   `fgt_password` varchar(255) COLLATE latin1_spanish_ci DEFAULT NULL,
   `fgt_api_key` varchar(255) COLLATE latin1_spanish_ci DEFAULT NULL,
   `server_ip` varchar(255) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `server_test` tinyint(1) DEFAULT '0',
+  `server_check` varchar(255) COLLATE latin1_spanish_ci DEFAULT NULL,
   PRIMARY KEY (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;

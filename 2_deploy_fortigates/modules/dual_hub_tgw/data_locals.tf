@@ -190,7 +190,7 @@ locals {
         external_port = var.app_external_port
         mapped_port   = var.app_mapped_port
         public_port   = element([for port in v : port["port"] if port["tag"] == "public"], 0)
-        private_port  = element([for port in v : port["port"] if port["tag"] == "private"], 0)
+        private_port  = local.hub_1_cluster_type == "fgsp" ? "gre-to-tgw" : element([for port in v : port["port"] if port["tag"] == "private"], 0)
         suffix        = var.app_external_port
       }
     )
@@ -203,7 +203,7 @@ locals {
         external_port = "2222"
         mapped_port   = "22"
         public_port   = element([for port in v : port["port"] if port["tag"] == "public"], 0)
-        private_port  = element([for port in v : port["port"] if port["tag"] == "private"], 0)
+        private_port  = local.hub_1_cluster_type == "fgsp" ? "gre-to-tgw" : element([for port in v : port["port"] if port["tag"] == "private"], 0)
         suffix        = "2222"
       }
     )
@@ -216,7 +216,7 @@ locals {
         external_port = "2223"
         mapped_port   = "22"
         public_port   = element([for port in v : port["port"] if port["tag"] == "public"], 0)
-        private_port  = element([for port in v : port["port"] if port["tag"] == "private"], 0)
+        private_port  = local.hub_1_cluster_type == "fgsp" ? "gre-to-tgw" : element([for port in v : port["port"] if port["tag"] == "private"], 0)
         suffix        = "2223"
       }
     )
@@ -229,7 +229,7 @@ locals {
         external_port = "443"
         mapped_port   = "443"
         public_port   = element([for port in v : port["port"] if port["tag"] == "public"], 0)
-        private_port  = element([for port in v : port["port"] if port["tag"] == "private"], 0)
+        private_port  = local.hub_1_cluster_type == "fgsp" ? "gre-to-tgw" : element([for port in v : port["port"] if port["tag"] == "private"], 0)
         suffix        = "443"
       }
     )
@@ -242,7 +242,7 @@ locals {
         external_port = "25"
         mapped_port   = "25"
         public_port   = element([for port in v : port["port"] if port["tag"] == "public"], 0)
-        private_port  = element([for port in v : port["port"] if port["tag"] == "private"], 0)
+        private_port  = local.hub_1_cluster_type == "fgsp" ? "gre-to-tgw" : element([for port in v : port["port"] if port["tag"] == "private"], 0)
         suffix        = "25"
       }
     )
@@ -255,7 +255,7 @@ locals {
         external_port = "587"
         mapped_port   = "587"
         public_port   = element([for port in v : port["port"] if port["tag"] == "public"], 0)
-        private_port  = element([for port in v : port["port"] if port["tag"] == "private"], 0)
+        private_port  = local.hub_1_cluster_type == "fgsp" ? "gre-to-tgw" : element([for port in v : port["port"] if port["tag"] == "private"], 0)
         suffix        = "587"
       }
     )

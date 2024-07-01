@@ -15,7 +15,7 @@ module "r1_users_fgt" {
   spoke_cidr_net = "10" // "10.${spoke_cidr_net}.${user_number}.0/24"
 
   number_users = local.number_users
-  vpn_hubs     = local.r1_hubs
+  vpn_hubs     = local.vpn_hubs
 
   app1_external_port = local.app1_external_port
   app2_external_port = local.app2_external_port
@@ -42,7 +42,7 @@ module "r2_users_fgt" {
   spoke_cidr_net = "20" // "10.${spoke_cidr_net}.${user_number}.0/24"
 
   number_users = local.number_users
-  vpn_hubs     = local.r1_hubs
+  vpn_hubs     = local.vpn_hubs
 
   app1_external_port = local.app1_external_port
   app2_external_port = local.app2_external_port
@@ -69,7 +69,7 @@ module "r3_users_fgt" {
   spoke_cidr_net = "30" // "10.${spoke_cidr_net}.${user_number}.0/24"
 
   number_users = local.number_users
-  vpn_hubs     = local.r1_hubs
+  vpn_hubs     = local.vpn_hubs
 
   app1_external_port = local.app1_external_port
   app2_external_port = local.app2_external_port

@@ -6,15 +6,15 @@ data "template_file" "fgt" {
   template = file("${path.module}/templates/fgt-all.conf")
 
   vars = {
-    fgt_id         = var.config_spoke ? "${var.spoke["id"]}" : "${var.hub[0]["id"]}"
-    admin_port     = var.admin_port
-    admin_cidr     = var.admin_cidr
-    adminusername  = "admin"
-    type           = var.license_type
-    license_file   = var.license_file
+    fgt_id          = var.config_spoke ? "${var.spoke["id"]}" : "${var.hub[0]["id"]}"
+    admin_port      = var.admin_port
+    admin_cidr      = var.admin_cidr
+    adminusername   = "admin"
+    type            = var.license_type
+    license_file    = var.license_file
     fortiflex_token = var.fortiflex_token
-    rsa-public-key = trimspace(var.rsa-public-key)
-    api_key        = var.api_key == null ? random_string.api_key.result : var.api_key
+    rsa-public-key  = trimspace(var.rsa-public-key)
+    api_key         = var.api_key == null ? random_string.api_key.result : var.api_key
 
     public_port  = var.public_port
     public_ip    = var.fgt_ni_ips["public"]
@@ -27,16 +27,16 @@ data "template_file" "fgt" {
     private_gw   = cidrhost(var.subnet_cidrs["private"], 1)
     private_cidr = var.subnet_cidrs["private"]
 
-    fgt_sdn-config         = data.template_file.fgt_sdn-config.rendered
-    fgt_bgp-config         = data.template_file.fgt_bgp-config.rendered
-    fgt_static-config      = var.vpc-spoke_cidr != null ? data.template_file.fgt_static-config.rendered : ""
-    fgt_sdwan-config       = var.config_spoke ? join("\n", data.template_file.fgt_sdwan-config.*.rendered) : ""
-    fgt_tgw-gre-config     = var.config_tgw-gre ? data.template_file.fgt_tgw-gre-config.rendered : ""
-    fgt_vxlan-config       = var.config_vxlan ? data.template_file.fgt_vxlan-config.rendered : ""
-    fgt_vpn-config         = var.config_hub ? join("\n", data.template_file.fgt_vpn-config.*.rendered) : ""
-    fgt_fmg-config         = var.config_fmg ? data.template_file.fgt_fmg-config.rendered : ""
-    fgt_faz-config         = var.config_faz ? data.template_file.fgt_faz-config.rendered : ""
-    fgt_extra-config       = var.fgt_extra-config
+    fgt_sdn-config     = data.template_file.fgt_sdn-config.rendered
+    fgt_bgp-config     = data.template_file.fgt_bgp-config.rendered
+    fgt_static-config  = var.vpc-spoke_cidr != null ? data.template_file.fgt_static-config.rendered : ""
+    fgt_sdwan-config   = var.config_spoke ? join("\n", data.template_file.fgt_sdwan-config.*.rendered) : ""
+    fgt_tgw-gre-config = var.config_tgw-gre ? data.template_file.fgt_tgw-gre-config.rendered : ""
+    fgt_vxlan-config   = var.config_vxlan ? data.template_file.fgt_vxlan-config.rendered : ""
+    fgt_vpn-config     = var.config_hub ? join("\n", data.template_file.fgt_vpn-config.*.rendered) : ""
+    fgt_fmg-config     = var.config_fmg ? data.template_file.fgt_fmg-config.rendered : ""
+    fgt_faz-config     = var.config_faz ? data.template_file.fgt_faz-config.rendered : ""
+    fgt_extra-config   = var.fgt_extra-config
   }
 }
 
@@ -51,8 +51,8 @@ data "template_file" "fgt_sdwan-config" {
     hub_id            = var.hubs[count.index]["id"]
     hub_ipsec_id      = "${var.hubs[count.index]["id"]}_ipsec_${count.index + 1}"
     hub_vpn_psk       = var.hubs[count.index]["vpn_psk"] == "" ? random_string.vpn_psk.result : var.hubs[count.index]["vpn_psk"]
-    hub_external_ip   = lookup(var.hubs[count.index],"external_ip", "")
-    hub_external_fqdn = lookup(var.hubs[count.index],"external_fqdn", "")
+    hub_external_ip   = lookup(var.hubs[count.index], "external_ip", "")
+    hub_external_fqdn = lookup(var.hubs[count.index], "external_fqdn", "")
     hub_private_ip    = var.hubs[count.index]["hub_ip"]
     site_private_ip   = var.hubs[count.index]["site_ip"]
     hub_bgp_asn       = var.hubs[count.index]["bgp_asn"]

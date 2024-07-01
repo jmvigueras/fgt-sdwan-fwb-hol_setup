@@ -27,9 +27,9 @@ output "users_fgt" {
 #-----------------------------------------------------------------------------------------------------
 output "keypair_names" {
   value = {
-    r1 = aws_key_pair.r1_keypair.key_name
-    r2 = aws_key_pair.r2_keypair.key_name
-    r3 = aws_key_pair.r3_keypair.key_name
+    r1  = aws_key_pair.r1_keypair.key_name
+    r2  = aws_key_pair.r2_keypair.key_name
+    r3  = aws_key_pair.r3_keypair.key_name
     hub = aws_key_pair.hub_keypair.key_name
   }
 }

@@ -37,7 +37,8 @@ module "user_config" {
   fgt_extra-config = join("\n",
     [data.template_file.user_extra_config_app1[each.key].rendered],
     [data.template_file.user_extra_config_app2[each.key].rendered],
-    [data.template_file.user_extra_config_ssh[each.key].rendered]
+    [data.template_file.user_extra_config_ssh[each.key].rendered],
+    [data.template_file.user_extra_config_hck_server[each.key].rendered]
   )
 
   config_spoke = true
@@ -106,6 +107,18 @@ data "template_file" "user_extra_config_ssh" {
     public_port   = "port1"
     private_port  = "port2"
     suffix        = "2222"
+  }
+}
+// Create firewall policies to allow health check from Server
+data "template_file" "user_extra_config_hck_server" {
+  for_each = local.spokes_sdwan
+
+  template = file("${path.module}/templates/fgt_config_student.conf")
+  vars = {
+    public_port   = "port1"
+    private_port  = "port2"
+    lab_server_ip = var.lab_srv_private_ip
+    tag_student   = "please-use-student-id"
   }
 }
 // Create NIC for Users VM

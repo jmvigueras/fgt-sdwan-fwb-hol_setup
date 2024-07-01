@@ -160,11 +160,11 @@ variable "tgw_gre_interface_name" {
 # Route to change by SDN connector when FGCP and no LB
 #-----------------------------------------------------------------------------------
 variable "route_tables" {
-  type = list(string)
+  type    = list(string)
   default = null
 }
 variable "cluster_pips" {
-  type = list(string)
+  type    = list(string)
   default = null
 }
 
@@ -285,8 +285,8 @@ variable "fortiflex_token" {
 
 variable "keypair" {
   description = "Provide a keypair for accessing the FortiGate instances"
-  type      = string
-  default   = null
+  type        = string
+  default     = null
 }
 
 // SSH RSA public key for KeyPair if not exists

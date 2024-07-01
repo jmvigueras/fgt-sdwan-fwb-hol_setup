@@ -24,9 +24,9 @@ locals {
     az2 = "eu-west-3c"
   }
   hub_region = {
-    id  = "eu-south-2"
-    az1 = "eu-south-2a"
-    az2 = "eu-south-2c"
+    id  = "eu-central-1"
+    az1 = "eu-central-1a"
+    az2 = "eu-central-1c"
   }
   #-----------------------------------------------------------------------------------------------------
   # APP details 
@@ -40,7 +40,7 @@ locals {
   # Server LAB variables
   #--------------------------------------------------------------------------------------------
   # LAB server FQDN
-  lab_fqdn = "wwww.fortidemoscloud.com"
+  lab_fqdn = "www.fortidemoscloud.com"
 
   lab_token = trimspace(random_string.lab_token.result)
 
@@ -78,8 +78,8 @@ locals {
   hub_lab_server_ni   = data.terraform_remote_state.deploy_fortigates.outputs.lab_server_ni
   hub_fmail_ni        = data.terraform_remote_state.deploy_fortigates.outputs.fmail_ni
 
-  server_fqdn = "hub1.fortidemoscloud.com"
-  fmail_fqdn  = "hub1.fortidemoscloud.com"
+  server_fqdn = "server.fortidemoscloud.com"
+  fmail_fqdn  = "fmail.fortidemoscloud.com"
 
   #-----------------------------------------------------------------------------------------------------
   # Outputs 

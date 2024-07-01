@@ -8,18 +8,18 @@ module "dual_hub" {
   instance_type  = local.fgt_instance_type
   fgt_build      = local.fgt_build
 
-  region  = local.hub_region["id"]
-  azs     = [local.hub_region["az1"], local.hub_region["az2"]]
-  prefix  = local.prefix
+  region = local.hub_region["id"]
+  azs    = [local.hub_region["az1"], local.hub_region["az2"]]
+  prefix = local.prefix
 
   app_external_port = local.lab_server_external_port
   app_mapped_port   = local.lab_server_mapped_port
 
   route53_zone_name = local.route53_zone_name
 
-  hub_1_vpc_cidr            = local.hub_1_vpc_cidr
-  hub_2_vpc_cidr            = local.hub_2_vpc_cidr
-  hub_1_spoke_to_tgw_cidrs  = local.hub_1_spoke_to_tgw_cidrs
+  hub_1_vpc_cidr           = local.hub_1_vpc_cidr
+  hub_2_vpc_cidr           = local.hub_2_vpc_cidr
+  hub_1_spoke_to_tgw_cidrs = local.hub_1_spoke_to_tgw_cidrs
 
   hub_1_dns_record = local.hub_1_dns_record
   hub_2_dns_record = local.hub_2_dns_record
